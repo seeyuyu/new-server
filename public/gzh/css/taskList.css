@@ -1,0 +1,148 @@
+header{
+    height: 0.5rem;
+    width: 100%;
+    background-color:#2cced1;
+    text-align: center;
+    line-height: 0.5rem;
+}
+div{
+    /*background-color: #ccc;*/
+}
+.list{
+    /* height:70rem; */
+    padding: 0.1rem 0rem;
+    border-bottom:  #ccc solid 0.02rem;
+    display: flex;
+    background:#fff;
+    align-items: center;
+    color:#ffffff;
+}
+.left{
+    color:green;
+    align-items:center;
+    display: flex;
+    width: 0.5rem;
+    height: 0.45rem;
+    /*background: pink;*/
+    flex-direction: column;
+}
+.left > .zan{
+    width: 0.15rem;
+    height: 0.2rem;
+    background: url("/gzh/images/dianzan.png") no-repeat center;
+    -webkit-background-size: 0.15rem;
+    background-size: 0.15rem;
+}
+.left > .zanRed{
+    width: 0.15rem;
+    height: 0.2rem;
+    background: url("/gzh/images/dianzanRed.png") no-repeat center;
+    -webkit-background-size: 0.15rem;
+    background-size: 0.15rem;
+}
+
+.center{
+    color:#ffffff;
+    width: calc( 100% - 1.5rem );
+    /*background: yellow;*/
+}
+.center>.title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    overflow: hidden;
+    width:100%;
+
+}
+
+
+.center>.content{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width:100%;
+
+}
+/*查看详情按钮样式*/
+.lookOver{
+    display: inline-block;
+    border-radius: 0.2rem;
+    border:0.01rem solid #2dccd2;
+    width: 0.6rem;
+    height: 0.2rem;
+    text-align: center;
+    line-height:0.2rem;
+
+}
+
+/*钟表的样式*/
+
+.spanIcon{
+    position: relative;
+    display:flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+/*.iconTime{*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*background: url("/gzh/images/shijian.png") no-repeat center;*/
+    /*background-size: 0.15rem;*/
+    /*height: 0.17rem;*/
+    /*line-height:0.1rem;*/
+/*}*/
+
+/*小眼睛的样式*/
+.eye{
+    display: inline-block;
+    height: 0.12rem;
+    width: 0.12rem;
+    background: url("/gzh/images/yanjing.png") no-repeat center;
+    -webkit-background-size: 0.12rem;
+    background-size: 0.12rem;
+}
+.right{
+    color:green;
+    flex-direction: column;
+    width: 1rem;
+    display: flex;    
+    height: 0.5rem;
+    /*background: blue;*/
+    flex-direction: column;
+    align-items:center;
+}
+
+.right a{
+    color: black;
+}
+@keyframes scaleDraw {  /*����ؼ�֡��scaleDrew����Ҫ�󶨵�ѡ�����Ĺؼ�֡����*/
+    0%{
+        transform: scale(1);  /*��ʼΪԭʼ��С*/
+    }
+    25%{
+        transform: scale(1.1); /*�Ŵ�1.1��*/
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+}
+.ballon{
+    position: fixed;
+    left: calc(50% - 0.25rem);
+    bottom: 0.5rem;
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    color: white;
+    line-height: 0.5rem;
+    text-align: center;
+    background: green;
+    background-size: 150px 200px;
+    -webkit-animation-name: scaleDraw; /*�ؼ�֡����*/
+    -webkit-animation-timing-function: ease-in-out; /*�������ٶ�����*/
+    -webkit-animation-iteration-count: infinite;  /*�������ŵĴ���*/
+    -webkit-animation-duration: 5s; /*���������ѵ�ʱ��*/
+}

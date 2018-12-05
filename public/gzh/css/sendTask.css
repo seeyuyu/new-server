@@ -1,0 +1,218 @@
+
+
+header{
+    height: 0.5rem;
+    width: 100%;
+    /*background-color:#2cced1;*/
+}
+
+
+.title{
+    height: 0.4rem;
+    /*background-color:pink;*/
+    padding: 0.7rem 0.3rem 0rem 0.3rem;
+    border-bottom: #464646 0.02rem solid;
+}
+.title>.tit_1{
+    width: 100%;
+}
+
+.scribe{
+    height: 2.56rem;
+    padding: 0.15rem  0.3rem;
+    border:  0.02rem;
+    /*background-color: green;*/
+    /*border-color: yellow;*/
+    padding: 0.15rem 0.3rem;
+    margin-bottom: .02rem;
+}
+.scribe .text1{
+    min-height: 1.28rem;
+    width: 100%;
+    resize: none;
+    font-size: 0.19rem;
+    border:none;
+}
+.scribe  .photoList{
+    position: relative;
+}
+
+#photos{
+    position: absolute;
+    cursor:pointer;
+}
+.file{
+    display:none;
+    position: absolute;
+    left: 0;top: 0;
+    width: 0%;
+    height: 0%;
+}
+.scribe  .photoList .myimg{
+     width: 1rem;
+     height: 1rem;
+     /*background:yellow;  */
+     /*position: relative; */
+     top: 0rem;
+     left: 0rem;
+ }
+.scribe  .photoList .myimg_fa{
+    width: 1rem;
+    height: 1rem;
+    padding-left: 0.05rem;
+    position: relative;
+}
+.scribe  .photoList .myimg_fa> .del_icon{
+    position: absolute;
+    right: -0.15rem;
+    top: -.15rem;
+    content:"";
+    display: block;
+    width: .3rem;
+    height: .3rem;
+    background: url(/gzh/images/close.png) no-repeat ;
+    -webkit-background-size: .3rem .3rem;
+    background-size: .3rem .3rem;
+
+}
+
+.scribe  .photoList .icon{
+    width: 1rem;
+    height: 1rem;
+    /*background:yellow;*/
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+}
+
+.scribe .photoList> .icon img{
+    padding-top: 0.2rem;
+    display: block;
+    margin: 0 auto;
+    width: 0.3rem;
+    /*z-index: 10;*/
+    height: 0.3rem;
+    /*background: url("../../common/image/xiangji.png") no-repeat ;*/
+}  
+
+.scribe .photoList> .icon p{
+    text-align: center;
+    font-size: 0.05rem;
+    width: 100%;
+}  
+
+
+.payment{
+    height: 0.5rem;
+    /*background-color:yellowgreen;*/
+    padding-left: 0.3rem;
+}
+.payment span{
+    line-height: 0.5rem;
+}
+.payment >input{
+    width:2rem;
+}
+
+
+footer{
+    height: 1.64rem;
+    /*background-color :pink;*/
+    padding: 0.15rem 0.3rem ;
+}
+footer .top{
+    height: 0.24rem;
+    font-size: 0.2rem;
+    line-height: .24rem;
+    /*background-color:purple;*/
+}
+.telText{
+    font-size: 0.2rem;
+    padding-right: 0.1rem;
+    /* vertical-align: top; */
+}
+/*.pullDowm{*/
+    /*width: 0.42rem;*/
+    /*height: 0.22rem;*/
+    /*border: 0.01rem;*/
+    /*padding: 0rem 0.08rem; */
+    /*!*background:green;*!*/
+    /*border-radius: 0.1rem;*/
+    /*margin-right: 0.1rem;*/
+    /*align-items: center;*/
+    /*display: flex;*/
+/*}*/
+/*.pullDowm >select{*/
+    /*align-items: center;*/
+    /*border: 0.01rem;*/
+    /*width: auto;*/
+    /*!*padding: 0 2%;*!*/
+    /*margin: 0;*/
+    /*line-height: 0.14rem;*/
+/*}*/
+
+/*.pullDowm >select>option{*/
+    /*text-align:center;*/
+    /*align-items: center;*/
+    /*border: 0.01rem;*/
+    /*width:0.1rem;*/
+    /*height: 0.12rem;*/
+/*}*/
+footer .top>input{
+    width: 2rem;
+    line-height: .22rem;
+    height: 0.26rem;
+    padding-left: 0.1rem;
+    border-radius: 0.1rem;
+
+    /*font-size: 0.14rem;*/
+
+}
+footer .bot{
+    height: 0.32rem;
+    width: 1rem;
+    color: green;
+    display: block;
+    border: 1px solid;
+    text-align: center;
+    margin: auto;
+    margin-top: 0.4rem;
+    line-height: 0.3rem;
+    /*background-color: #2cced1;*/
+    border-radius: 0.1rem;
+}
+/*遮罩层*/
+.infoAlert {
+    width: 1.4rem;
+    height: 0.5rem;
+    background: black;
+    color: white;
+    position: absolute;
+    top: 35%;
+    left: calc(50% - 0.7rem);
+    text-align: center;
+    line-height: 0.5rem;
+    -webkit-border-radius: 0.1rem;
+    -moz-border-radius: 0.1rem;
+    border-radius: 0.1rem;
+    display: none;
+}
+
+.infoAlertTime{
+    width: 1.0rem;
+    height: 1.0rem;
+    /*background: ;*/
+    /*color: white;*/
+    position: absolute;
+    top: 45%;
+    /*left: calc(50% - 0.5rem);*/
+    left: 1.3rem;
+
+    text-align: center;
+    line-height: 0.5rem;
+    -webkit-border-radius: 0.1rem;
+    -moz-border-radius: 0.1rem;
+    border-radius: 0.1rem;
+    /*z-index: 100;*/
+    /*display: none;*/
+}

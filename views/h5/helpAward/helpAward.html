@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <meta name="format-detection" content="telephone=no" >   
+    <!-- //禁止自动识别数字为手机号码 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <!-- // 去掉苹果工具栏和菜单栏 -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="/h5/css/base.css">
+    <link rel="stylesheet" href="/h5/css/helpAward.css">
+</head>
+<script>
+(function (doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=750){
+          docEl.style.fontSize = '20px';
+        }else{
+          docEl.style.fontSize = 50 * (clientWidth / 375) + 'px';
+        }
+      };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+
+<body>
+<div id="content"></div>
+<script id="tpl" type="text/html">
+    <header>
+        <div class="left fl">
+            <img  class="fl" alt=""  src="{{avatar}}"
+                  style="width: 0.80rem;height: 0.8rem"/>
+            <div class="fl name">{{nickname}}</div>
+        </div>
+        <p class="right">
+           {{created}}
+        </p>
+    </header>
+    <footer>
+        <div class="head">
+            <div class="top">任务详情</div>
+            <div class="bottem">
+                <div class="left fl">
+                    <i class=" dizhi fl"></i>
+                    <span class="fl">地点:{{task_address}}</span>
+                </div>
+                <div class="right payment fr">￥{{rank}}</div>
+            </div>
+            <div class="foter">
+                <i class="duigou fl"></i>
+                <span class="">完成期限:{{end_time}}</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="top">{{text}}
+                </div>
+            <div class=bot_fa>
+                <img class="bot" style="height: 3.61rem;width:100%" src="{{images[0]}}" alt=""/>
+            </div>
+
+        </div>
+        <div class="limit">
+            <div class="title">接取任务限制</div>
+            <div class="content">
+                信誉值:{{}}&nbsp;实名:{{}} &nbsp;性别:{{}}
+            </div>
+            <div class="bottem">
+                学校认证:{{}}
+            </div>
+        </div>
+    </footer>
+</script>
+
+</body>
+
+<!--************888888-->
+<script src="/h5/js/jquery.min.js">
+</script>
+<script src ="/h5/js/template.js"></script>
+<script>
+$(document).ready(function(){
+
+
+
+    var url ="https://test.globalmxb.com/api/v1/task/detail?task_id="
+//获取url的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+
+
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp );//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '.';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '.';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D;//时分秒可以根据自己的需求加上
+    }
+
+    $.ajax({
+//        url:url+getUrlParam(task_id),
+        url:url+'5b9b6ef15326d47e48212e48',
+        type:"GET",
+        dataType:"json",
+        success:function(res){
+            console.log("res is ");
+            console.log(res.data);
+            res.data.created =timestampToTime(res.data.created);
+            res.data.end_time =timestampToTime(res.data.end_time);
+
+            var html = template("tpl",res.data);
+            $("#content").html(html);
+
+        },
+        err:function(err){
+            console.log(err);
+        }
+    })
+})
+</script>
+
+</html>

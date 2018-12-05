@@ -1,0 +1,59 @@
+{
+  "port":80,
+  "host":"https://h5.globalmxb.com",
+  "qiniu_host":"http://files.uniccat.com/",
+  "redis":{
+    "host":"47.92.49.183",
+    "port":7999,
+    "password":"redistest",
+    "connectTimeout": 3000
+  },
+  "jpush":{
+  "appkey":"2a00bea01ea2773a08c69fc8",
+  "appsecret":"8978cad812b1461a82c48db0"
+},
+  "weixinpay":{
+    "appid":"wx67378be2f4361b44",
+    "mch_id":"1509390711",
+    "partner_key":"jijibeijingwangluomingxiaobangkj"
+  },
+  "easemob":{
+    "AppKey" : "mxbangtest",
+    "EM_token" : "YWMt6lpA9rWnEeis33uKALSdEgAAAAAAAAAAAAAAAAAAAAFqgh7wkW8R6KrwwTt1j-moAgMAAAFlyAjG4gBPGgBbVCaQWHKXrVWSSgRNq2Xd31NwmKerqCPNPi16d6t1lA"
+  },
+  "elasticsearch":{
+    "host":"47.95.49.82",
+    "port":9000
+  },
+  "qingbei":{
+    "APPID":"",
+    "":""
+
+  },
+  "goqun":{
+    "APPID":"",
+    "":""
+
+  },
+  "mxy":{
+    "APPID":"",
+    "":""
+
+  },
+  "mongodb":{
+    "host":"mongodb://47.92.49.183:27000/lidy",
+    //"user":"credit",
+    //"pass":"Kkktu4@K2",
+    "extra":{
+      "server":{
+        "auto_connect":true,
+        "poolSize":10,
+        "socketOptions" :{
+          "timeOut":1000,
+          "keepAlive": 1
+        }
+      }
+    }
+  },
+  "limit":10
+}

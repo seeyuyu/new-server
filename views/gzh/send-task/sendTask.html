@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>名校邦</title>
+    <meta name="format-detection" content="telephone=no" >
+    <!-- //禁止自动识别数字为手机号码 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <!-- // 去掉苹果工具栏和菜单栏 -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="/gzh/css/base.css">
+    <link rel="stylesheet" href="/gzh/css/sendTask.css">
+
+</head>
+<script>
+(function (doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=750){
+          docEl.style.fontSize = '20px';
+        }else{
+          docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+        }
+      };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+
+<body>
+    <header>名校邦
+    </header>
+    <div class="title">
+        <input class="tit_1" type="text" maxlength="20" placeholder="请输入标题">
+    </div>
+    <div class="scribe">
+        <textarea class="text1" placeholder="请输入任务描述"
+                    maxlength="400"
+                  onkeyup="this.value=this.value.substring(0, 400)"></textarea>
+<!--相册区域-->
+        <div class="photoList" data-number="0">
+            <!--<div class="myimg_fa fl" >-->
+                <!--<img class="myimg"/>-->
+                <!--<i class="del_icon"></i>-->
+                <!--&lt;!&ndash;隐藏域,保存数据&ndash;&gt;-->
+                <!--<input type="text" class="hiddenImg" style="display: none">-->
+            <!--</div>-->
+            <!--<div class="myimg"></div>-->
+            <input type="file"  class="file" id="imgUpFile" onchange="startRead(this)" style="display:none;
+    position: absolute;
+    left: 0;top: 0;
+    width: 0%;
+    height: 0%;" >
+
+            <label for="imgUpFile" id="photos" class="icon">
+                <img src="/gzh/images/xiangji.png"  alt=""/>
+                <p>添加图片或拍照</p>
+            </label>
+        </div>
+    </div>
+
+    <div class="payment">
+        <span>赏金</span>
+        <span>￥</span>
+        <input id="payment"type="text"  placeholder="0"/>
+
+    </div>
+    <footer>
+        <div class="top">
+            <div class="fl telText">电话信息:&nbsp;</div>
+            <div class="pullDowm fl">
+                <select class="f12 " id="type" style="display: none">
+                    <option value="1">微信</option>
+                    <option value="2">QQ</option>
+                    <option value="3">电话</option>
+                    <option value="4">微博</option>
+                </select>
+            </div>
+            <input id="number" class="fl " placeholder="请输入联系方式" type="text">
+        </div>
+        <!--<input id="lidy"  onchange="startRead()" type="file">-->
+        <!--<div class="imgContent">-->
+            <!--<img id="imgContentImg" src="" alt="">-->
+            <!--<input type="file" class="file" id="imgUpFile" onchange="startRead()" style="position: absolute;left: 0;top: 0;width: 25%;height: 25%;">-->
+        <!--</div>-->
+
+        <script>
+            function startRead(that) {
+//               获取当前图片数量
+                var _picNumber = $(that).parent().data("number");
+//               获取input组件
+                var fileDom=document.getElementById('imgUpFile');
+//      var img=document.getElementById('imgContentImg');
+                console.log("当前图片的数量是",_picNumber);
+                var img=$(".myimg")[$(".myimg").length-1];
+
+//                将自定义属性传递过去
+                $(that).parent().data("number" , ++_picNumber);
+                console.log($(".myimg").length);
+                console.log(img);
+
+                var file=fileDom.files[0];
+
+                var formData = new FormData();
+
+                formData.append("image", $("#imgUpFile")[0].files[0]);
+//                开启遮罩
+                $('html,body').addClass('ovfHiden');                        //使网页不可滚动
+                $("#infoAlert2").show();
+                $.ajax({
+                    url:"http://h5.globalmxb.com/task/upload",
+                    type:"POST",
+                    data:formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success:function (res) {
+//                        console.log(res.group_avatar);
+//                        设置图片到页面上
+                        img.setAttribute('src',res.group_avatar);
+                        $('html,body').removeClass('ovfHiden'); //使网页恢复可滚
+                        $("#infoAlert2").hide();
+
+                    }
+                })
+//                if (fileDom&&img){
+////                    fileHandle(fileDom,img);
+//                }
+            }
+//            function fileHandle(fileDom,img) {
+//                //读取计算机文件
+//                var file=fileDom.files[0];
+//                var reader=new FileReader();
+//                reader.readAsDataURL(file);
+//                reader.onloadstart=function () {
+//                    console.log(typeof(file));
+//                    console.log('文件上传处理......')
+//                };
+//                //操作完成
+//                reader.onload = function(e){
+//                    //file 对象的属性
+//                    img.setAttribute('src',reader.result);
+//                };
+//            }
+        </script>
+        <div class="bot">
+            <a href="javascript:;" id="openFa" data-open_id="<%= open_id %>" style="display: inline-block;width:1rem;color: green;">发布</a>
+        </div>
+
+    </footer>
+<!--请填写完整信息-->
+<div class="infoAlert" style="display: none;" id="infoAlert1">请填写完整信息</div>
+
+    <!--等待上传ing-->
+    <div id="infoAlert2" style="position: absolute;height: 100%;width: 100%;top:0;left:0;background:black;opacity: 0.3; z-index: 1000;display: none"><img class="infoAlertTime" src="/gzh/images/loading.gif" alt=""> </div>
+
+    <!--<div id="shouquan">授权</div>-->
+</body>
+<!--jssdk,接入-->
+<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>-->
+<script src="/gzh/js/jquery.min.js"></script>
+<script src=/gzh/js/util.js> </script>
+<script src ="/gzh/js/sendTask.js"></script>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>名校邦</title>
+    <meta name="format-detection" content="telephone=no" >   
+    <!-- //禁止自动识别数字为手机号码 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <!-- // 去掉苹果工具栏和菜单栏 -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="/gzh/css/base.css">
+    <link rel="stylesheet" href="/gzh/css/describe.css">
+
+    <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                if(clientWidth>=750){
+                    docEl.style.fontSize = '20px';
+                }else{
+                    docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                }
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+</head>
+
+<body>
+<header>名校邦</header>
+
+<div id="des_top"></div>
+
+<script id="theFirst" type="text/html">
+    <div class="title bot1">
+        {{title}}
+        </div>
+        <div class="textLine bot1"><p>{{text}}</p>
+
+            <div myImages class=" imagesList">
+                {{each images}}
+                <img class="myImages" src="{{$value}}" alt="">
+
+                {{/each}}
+            </div>
+
+        </div>
+    <div class="payment bot1">赏金：￥{{money}}元</div>
+    <div class="tell">
+        <span  class="find_number" data-number ="{{mobile}}">查看联系方式</span>
+
+        </div>
+</script>
+
+<div class="name">
+    <span>姓名:</span>
+    <input type="text" id="name"/>
+</div>
+<div class="postDiscuss">
+    <div class="top">
+        <span>评论：</span>
+        <textarea id="discuss"></textarea></div>
+    <div class="bot">
+        <input  id="sub" type="submit" name="提交"/>
+    </div>
+</div>
+
+<div id="des_dis"></div>
+
+<!--分割线----------------            ----- 第二个       template-->
+    <script id="theSecond" type="text/html">
+        <div class="list">
+            {{each publishLists }}
+            <div class="getDiscuss bot1 ">
+                <div class="top">
+                    <div class="left fl f12">{{$value.name}}:{{$value.discuss}}
+                    </div>
+                    <div data-id="{{$value.id}}" data-value="{{$value.is_thumbs_up}}" id="is_thumbs_up" class="right  f12 fr" style="display: flex; align-items: center;">
+                        <i  class=" {{ $value.is_thumbs_up ? 'zanRed':'zan'}}"></i>
+                        <i style="padding-top: 0.05rem;padding-left: 0.1rem;">{{$value.discuss_upCount}}</i></div>
+                </div>
+                <div class="bot f12">
+                    <i class="fl"><i class="icon iconTime"></i>&nbsp&nbsp&nbsp&nbsp</i>
+                    <p class="fl f12">{{$value.created}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </script>
+<div class="infoAlert" style="display: none;" id="infoAlert">请填写完整信息</div>
+
+<div class="infoAlert" style="display: none;" id="infoAlertSuccess">发表成功</div>
+</body>
+<!--************888888-->
+
+<script src="/gzh/js/jquery.min.js">
+</script>
+<script src ="/gzh/js/template.js"></script>
+<script src="/gzh/js/describe.js">
+
+</script>
+
+</html>

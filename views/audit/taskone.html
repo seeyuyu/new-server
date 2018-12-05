@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Purple_loginform Website Template | Home :: w3layouts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- -->
+	<style>
+		body{
+			font-size: 8px;
+		}
+
+		table, th , td  {
+			border: 1px solid grey;
+			border-collapse: collapse;
+			padding: 5px;
+		}
+		table tr:nth-child(odd) {
+			background-color: #f1f1f1;
+		}
+		table tr:nth-child(even) {
+			background-color: #ffffff;
+		}
+		img
+		{
+			width:150px;
+			height: 200px;
+		}
+		.tb{
+			width: 100%;
+		}
+	</style>
+
+
+	<script type="text/javascript" src="/audit/js/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+            var isstick = $(".stick").val();
+            if(isstick==0){
+                $(".but").append("<button onclick='stick(1)'>置顶</button>");
+            }else if(isstick==1){
+                $(".but").append("<button onclick='stick(0)'>取消置顶</button>");
+            }
+		})
+	</script>
+</head>
+<body>
+<!-- contact-form -->
+<div class="message warning">
+<div class="inset">
+
+	<table class="tb">
+		<tr>
+			<td width="200">任务id</td>
+			<td>
+				<%= row._id %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">任务标题</td>
+			<td>
+				<%= row.title %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">任务内容</td>
+			<td>
+				<%= row.text %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">任务图片</td>
+			<td>
+				<% for (var i=0; i< row.images.length; i++) { %>
+
+					<img src="<%= row.images[i] %>">
+
+
+				<% } %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">任务赏金</td>
+			<td>
+				<%= row.money %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">联系方式</td>
+			<td>
+				<%= row.mobile %>
+			</td>
+		</tr>
+		<tr>
+			<td width="200">操作</td>
+			<td class="but">
+				<button class="del" value='<%= row._id %>' onclick="del(this)">删除</button>
+				<button value='<%= row._id %>' onclick="ckpl(this)">查看评论</button>
+				<input type="hidden" class="stick" value="<%= row.is_stick %>">
+			</td>
+		</tr>
+
+	</table>
+
+</div>
+	</div>
+	</div>
+	<div class="clear"> </div>
+<!--- footer --->
+<div class="footer">
+</div>
+
+</body>
+</html>
+
+<script>
+	//删除
+	function del(that){
+        $.ajax({
+            type: "get",
+            url: "/task/list/del",
+            data: {
+                id:$(that).val()
+			},
+            success: function (data) {
+                if(data.code == 200){
+                   alert("删除成功");
+				}else{
+                    alert("删除失败");
+				}
+            },
+        });
+	}
+
+	//置顶 取消置顶
+	function stick(is_stick){
+        $.ajax({
+            type: "get",
+            url: "/task/list/stick",
+            data: {
+                stick:is_stick,
+				id:$(".del").val()
+			},
+            success: function (data) {
+                console.log(data)
+                if(data.code == 200){
+					alert("成功");
+					location.reload(true);
+				}else if(data.code == 201){
+                    alert("失败");
+				}else if(data.code == 204){
+                    alert(data.msg);
+				}
+            },
+        });
+	}
+
+	//查看评论
+	function ckpl(that){
+	    var id = $(that).val();
+	    //alert(id);
+		location.href="/task/discuss?id="+id;
+	}
+
+</script>

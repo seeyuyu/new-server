@@ -1,0 +1,6 @@
+stages:
+  - deploy
+deploy_job:
+  stage: deploy
+  script: ~/.local/bin/deploy
+

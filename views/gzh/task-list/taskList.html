@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>名校邦</title>
+    <meta name="format-detection" content="telephone=no" >   
+    <!-- //禁止自动识别数字为手机号码 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <!-- // 去掉苹果工具栏和菜单栏 -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="/gzh/css/base.css">
+    <link rel="stylesheet" href="/gzh/css/taskList.css">
+</head>
+<script>
+(function (doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=750){
+          docEl.style.fontSize = '20px';
+        }else{
+          docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+        }
+      };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+
+<body>
+<header id="open_id" data-id="<%= open_id %>">名校邦</header>
+<div id="lists">
+
+</div>
+<div class="ballon f14">发任务</div>
+<!--created 函数找不到？-->
+<!--{{$value.created | dateFormat:'yyyy-MM-dd h:m:s'}}-->
+<script id="taskList" type="text/html">
+    {{each stick}}
+    <div class="list" style="position: relative;">
+        <div class="left fl">
+            <i class="{{ $value.is_thumbs_up ? 'zanRed':'zan'}} f14"></i>
+            <span class="f14" data-id="{{$value.id}}" data-value ="{{$value.is_thumbs_up}}">{{$value.thumbs_upCount}}</span>
+        </div>
+        <div style="color:red;position: absolute;
+top: 0.02rem;left:0.02rem;width:0.4rem; border: 0.01rem solid red;font-size: 0.14rem;text-align: center;">置顶</div>
+        <div class="center fl">
+            <p class="title f16 ptwo">{{$value.number}}&nbsp;|&nbsp;{{$value.title
+                }}</p>
+            <p class="content f14 pone">{{$value.text}}</p>
+            <!--最后一行的样式-->
+            <div style="display:flex; flex-wrap: nowrap;align-items: center;">
+                <span class="spanIcon f14">
+                    <i class="icon iconTime"></i>
+{{$value.created}}
+                </span>
+                <i style="padding-top: 0.02rem; padding-left:0.2rem;" class="eye"></i>
+                <span class="f12">{{$value.look}}</span>
+            </div>
+            <!--最后一行的样式-->
+        </div>
+        <div class="right fr">
+            <a class="f12 lookOver" href="/gzh/describe?task_id={{$value.id}}&open_id={{$value.open_id}}" data-taskid="{{$value.id}}" style="color: #2dccd2;">
+                查看详情
+            </a>
+            <div>
+                <i>￥</i>
+                <span>{{$value.money}}</span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+    {{each data}}
+
+    <div class="list">
+        <div class="left fl">
+            <i class="{{ $value.is_thumbs_up ? 'zanRed':'zan'}} f14"></i>
+            <span class="f14" data-id="{{$value.id}}" data-value ="{{$value.is_thumbs_up}}">{{$value.thumbs_upCount}}</span>
+        </div>
+
+        <div class="center fl">
+            <p class="title f16 ptwo">{{$value.number}}&nbsp;|&nbsp;{{$value.title
+                }}</p>
+            <p class="content f14 pone">{{$value.text}}</p>
+            <!--最后一行的样式-->
+            <div style="display:flex; flex-wrap: nowrap;align-items: center;">
+                <span class="spanIcon f14">
+                    <i  class="icon iconTime"></i>
+{{$value.created}}
+
+                </span>
+                <i style="padding-top: 0.02rem; padding-left:0.2rem;" class="eye"></i>
+                <span class="f12">{{$value.look}}</span>
+            </div>
+            <!--最后一行的样式-->
+
+        </div>
+
+        <div class="right fr">
+            <!--<div style ="border: 0.01rem solid #2dccd2;border-radius:0.2rem ;margin-top: 0.05rem;height: 0.2rem;-->
+<!--position: relative;">-->
+                <a class="f12 lookOver" href="/gzh/describe?task_id={{$value.id}}&open_id={{$value.open_id}}"
+                   data-href="/gzh/describe?open_id={{$value.open_id}}&task_id={{$value.id}}" data-taskid="{{$value.id}}" style="color: #2dccd2;">
+                    查看详情
+                </a>
+            <!--</div>-->
+
+            <div>
+                <i>￥</i>
+                <span>{{$value.money}}</span>
+            </div>
+        </div>
+
+    </div>
+    {{/each}}
+
+</script>
+</body>
+
+<!--************888888-->
+<script src="/gzh/js/jquery.min.js">
+</script>
+<script src ="/gzh/js/template.js"></script>
+<script src ="/gzh/js/taskList.js"></script>
+</html>
