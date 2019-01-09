@@ -1,6 +1,17 @@
 var koa = require('koa');
 var cors = require('koa-cors');
 var app = new koa();
+var Router = require('koa-router');
+
+const koajwt = require('koa-jwt');
+
+//jwt 校验token
+app.use(koajwt({
+    secret:'my_token'
+}).unless({
+    path: [/\/api\/register/,/\/api\/login/]
+}))
+
 
 //config
 var config = require('config');
@@ -106,7 +117,6 @@ app.use(require('./plugins/validator')({
 }));
 
 //routers
-var Router = require('koa-router');
 router = new Router();
 app.use(router.routes()).use(router.allowedMethods());
 app.use(require('./plugins/intercept')());
