@@ -41,7 +41,8 @@
 
   },
   "mongodb":{
-    "host":"mongodb://47.92.49.183:27000/lidy",
+//    "host":"mongodb://47.92.49.183:27000/haha",
+    "host":"mongodb://39.107.68.213:27000/react",
     //"user":"credit",
     //"pass":"Kkktu4@K2",
     "extra":{

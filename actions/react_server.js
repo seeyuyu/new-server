@@ -17,5 +17,57 @@ module.exports=function ($) {
         // self.body = result
         await next();
     });
-    $.get("/api/doLogin",Employee.login);
+    const crypto = require('crypto-js'),
+        jwt = require('jsonwebtoken');
+
+    $.post("/api/login",async (ctx,next) => {
+        console.log("进来了logon函数")
+        let self = ctx;
+        const data = ctx.request.fields;
+        console.log(ctx.request.fields);
+        console.log("****************")
+
+
+        if(!data.username || !data.password){
+            return ctx.sendError('000002', '参数不合法');
+        }
+
+        let employeeModel = self.model('employee');
+        let employee_row = await employeeModel.getRows({user_name:data.username})
+        employee_row = employee_row[0]
+        console.log("---------查找的东西 ");
+        console.log("employee_row is ****** ");
+        console.log(employee_row);
+        const result =null
+        // const result = await userModel.findOne({
+        //     name: data.name,
+        //     password: crypto.createHash('md5').update(data.password).digest('hex')
+        // })
+        //如果我们找到了东西，
+        console.log(employee_row.user_password === data.password)
+        // console.log(employee_row[0].user_password);
+        // console.log(data.password);
+
+        if(employee_row !== null && employee_row.user_password === data.password){
+            console.log("进来了返回token的函数")
+
+            const token = jwt.sign({
+                name: employee_row.name,
+                _id: employee_row._id
+            }, 'my_token', { expiresIn: 60*60 });
+            self.body={
+                token,
+                code:200,
+                msg:"success-_-"
+            }
+            // (token, '登录成功');
+            console.log('token is-->',token);
+            console.log("-*--*-*-*-*-*-*-*-*-*-*-*-*-*");
+            console.log('employee_row._id is ==>',employee_row._id)
+        }else{
+            self.body={
+                msg:'用户名或密码错误',
+            };
+        }
+    });
 }
