@@ -24,6 +24,7 @@ module.exports=function ($) {
         console.log("进来了logon函数")
         let self = ctx;
         const data = ctx.request.fields;
+        console.log(self.request.header)
         console.log(ctx.request.fields);
         console.log("****************")
 
@@ -37,7 +38,7 @@ module.exports=function ($) {
         employee_row = employee_row[0]
         console.log("---------查找的东西 ");
         console.log("employee_row is ****** ");
-        console.log(employee_row);
+        // console.log(employee_row);
         const result =null
         // const result = await userModel.findOne({
         //     name: data.name,
@@ -56,7 +57,7 @@ module.exports=function ($) {
                 _id: employee_row._id
             }, 'my_token', { expiresIn: 60*60 });
             self.body={
-                token,
+                data:{token},
                 code:200,
                 msg:"success-_-"
             }
